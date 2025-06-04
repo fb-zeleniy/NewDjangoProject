@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>{{ rubric.name }}</h1>
+{% for bb in all_bb %}
+
+<h1>{{bb.title}}</h1>
+<p>{{bb.content}} - {{bb.price}} - {{bb.published}}</p>
+
+{% endfor %}
+<a href="{% url 'app:index_html' %}">Назад</a>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<h1>Список фильмов</h1>
+
+<ul>
+  {% for film in films %}
+    <li>
+      <strong>{{ film.name|upper }}</strong><br>
+      Автор: {{ film.author }}<br>
+      Жанр: {{ film.genre|truncatechars:10 }}<br>
+      Год выхода: {{ film.year|date:"Y" }}<br>
+
+      {% if film.genre == "Комедия" %}
+        <em>Это комедия!</em>
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>Фильмы не найдены</li>
+  {% endfor %}
+</ul>

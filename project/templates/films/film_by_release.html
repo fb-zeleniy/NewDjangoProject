@@ -1,0 +1,6 @@
+<h1>Фильмы по дате выхода</h1>
+<ul>
+  {% for film in films %}
+    <li>{{ film.name }} — {{ film.year }}</li>
+  {% endfor %}
+</ul>
