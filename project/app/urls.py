@@ -48,8 +48,9 @@ urlpatterns = [
     path('paginator/',bb_paginator,name='paginator'),
     path('rubric-formset/', RubricSetView.as_view(), name='rubric_formset'),
     path('quiz/<int:pk>/', QuizFormsetView.as_view(), name='quiz_formset'),
-    path('api/book/<int:book_id>/', Book.as_view(), name="book_detail_json"),
-    path('download/', Example.as_view(), name="download_example_txt"),
+    #path('api/book/<int:book_id>/', Book.as_view(), name="book_detail_json"),
+    #path('download/', Example.as_view(), name="download_example_txt"),
+    path('create_bb/',create_bb().as_view(), name="create_bb"),
 ]
 
 
