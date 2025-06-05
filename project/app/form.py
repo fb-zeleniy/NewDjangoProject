@@ -1,5 +1,3 @@
-
-
 from django.forms import *
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
@@ -102,4 +100,5 @@ QuestionFormSet = inlineformset_factory(
 )
 
 
-
+#dz-26
+BbForm =  modelform_factory(Bb, fields=['title', 'author','rubric','price','content','published'])
