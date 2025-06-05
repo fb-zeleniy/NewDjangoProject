@@ -174,3 +174,17 @@ class FilmListByCreatedAt(View):
 def film_list(request):
     films = Film.objects.all()
     return render(request, "films/film_list.html", {"films": films})
+
+#dz-24
+from django.core.paginator import Paginator
+def  film_list(request):
+
+    film_list = Film.objects.all().order_by('-published')
+    paginator = Paginator(film_list, orphans=2)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj' : page_obj,
+        'paginator' : paginator,
+    }
+    return render(request, 'blog/film_list.html', {'page_obj': page_obj})
