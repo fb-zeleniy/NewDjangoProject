@@ -1,18 +1,45 @@
-<h1>Список фильмов</h1>
 
-<ul>
-  {% for film in films %}
-    <li>
-      <strong>{{ film.name|upper }}</strong><br>
-      Автор: {{ film.author }}<br>
-      Жанр: {{ film.genre|truncatechars:10 }}<br>
-      Год выхода: {{ film.year|date:"Y" }}<br>
+{% extends 'base.html' %}
 
-      {% if film.genre == "Комедия" %}
-        <em>Это комедия!</em>
-      {% endif %}
-    </li>
-  {% empty %}
-    <li>Фильмы не найдены</li>
-  {% endfor %}
-</ul>
+{% block title %}
+Film Paginator
+{% endblock %}
+
+{% block content %}
+
+<h1>Фильмы:</h1>
+{% for film in page_obj %}
+        <h2>{{ bb.title }}</h2>
+        <p>{{ bb.content }}</p>
+        <p>Издатель: {{ bb.author }} $</p>
+        <p>Дата публикации: {{ bb.published }}</p>
+{% empty %}
+    <p>Нет фильмов для отображения.</p>
+{% endfor %}
+
+{% if page_obj.has_other_pages %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}&per_page={{ page_obj.paginator.per_page}}">&laquo;</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if num == page_obj.number %}
+            <span>{{ num }}!</span>
+        {% elif num >= page_obj.number|add:'-3' and num <= page_obj.number|add:'3' %}
+            <a href="?page={{num}}&per_page={{page_obj.paginator.per_page}}">{{num}}</a>
+        {% endif%}
+    {% endfor %}
+
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}&per_page={{ page_obj.paginator.per_page}}">&raquo;</a>
+    {% endif %}
+
+    <p>
+        Показаны {{ page_obj.start_index }}-{{ page_obj.end_index }} из {{ page_obj.paginator.count }} постов.
+    </p>
+{% endif %}
+
+{% endblock %}
+
