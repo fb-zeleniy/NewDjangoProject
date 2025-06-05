@@ -343,3 +343,17 @@ class Example(models.Model):
             return FileResponse(open(file_path, 'rb'),as_attachement=True, filename='example.txt')
         else:
             raise Http404("File does not exists")
+
+#dz-26
+
+def create_bb(request):
+    BbForm = modelform_factory(Bb, fields=['title', 'author', 'rubric', 'price', 'content', 'published'])
+    if request.method == 'POST':
+        form = BbForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('create_bb')
+    else:
+        form = BbForm()
+
+    return render(request, 'bb_form.html', {'form': form})
